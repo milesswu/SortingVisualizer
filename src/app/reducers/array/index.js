@@ -1,9 +1,9 @@
-import { SET_ARRAY, SWAP_ELEMENTS, swapArrayElements } from "./actions";
+import { SET_ARRAY, SWAP_ELEMENTS } from "./actions";
 const initialState = [];
 
 //Helper functions
 const swap = (arr, index1, index2) => {
-	var temp = arr[index1];
+	let temp = arr[index1];
 	arr[index1] = arr[index2];
 	arr[index2] = temp;
 };
@@ -14,9 +14,11 @@ const array = (state = initialState, action) => {
 		case SET_ARRAY:
 			return action.payload.newArray;
 		case SWAP_ELEMENTS:
-			var tempArr = [...state];
+			let tempArr = [...state];
 			swap(tempArr, action.payload.index1, action.payload.index2);
 			return tempArr;
+		default:
+			return state;
 	}
 };
 
