@@ -5,7 +5,7 @@ import Body from "./body/BodyContainer";
 
 function App() {
 	return (
-		<div class="App">
+		<div className="App">
 			<OptionBar />
 			<Body />
 		</div>

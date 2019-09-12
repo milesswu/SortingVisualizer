@@ -1,0 +1,23 @@
+#option-bar {
+	min-width: 100vw;
+	min-height: 10vh;
+	background-color: #545f6b;
+	display: flex;
+}
+
+.row {
+	min-height: 100%;
+	min-width: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	text-transform: capitalize;
+}
+
+.col {
+	display: flex;
+}
+
+#sliders {
+	flex-direction: column;
+}
