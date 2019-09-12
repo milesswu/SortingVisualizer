@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import "./OptionBar.css";
 function OptionBar(props) {
-	console.log(props);
 	const { generateArray } = props;
 
 	//Initialize array
