@@ -75,6 +75,7 @@ function OptionBar(props) {
 						<option value="insertionSort">Insertion Sort</option>
 						<option value="bubbleSort">Bubble Sort</option>
 						<option value="hSort">H Sort</option>
+						<option value="shellSort">Shell Sort</option>
 						<option value="quickSort">QuickSort</option>
 						<option value="mergeSort">Merge Sort</option>
 						<option value="heapSort">Heap Sort</option>

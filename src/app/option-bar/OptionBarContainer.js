@@ -8,6 +8,7 @@ import selectionSort from "../algorithms/selectionSort";
 import insertionSort from "../algorithms/insertionSort";
 import bubbleSort from "../algorithms/bubbleSort";
 import hSort from "../algorithms/hSort";
+import shellSort from "../algorithms/shellSort";
 import quickSort from "../algorithms/quickSort";
 import mergeSort from "../algorithms/mergeSort";
 import heapSort from "../algorithms/heapSort";
@@ -45,6 +46,9 @@ const mapDispatchToProps = (dispatch) => ({
 				break;
 			case "hSort":
 				selectedAlgorithm = hSort;
+				break;
+			case "shellSort":
+				selectedAlgorithm = shellSort;
 				break;
 			case "quickSort":
 				selectedAlgorithm = quickSort;
