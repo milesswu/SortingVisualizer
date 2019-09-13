@@ -31,6 +31,7 @@ function OptionBar(props) {
 					<button
 						id="generateArray"
 						onClick={() => generateArray(array.length)}
+						disabled={runStatus}
 					>
 						Generate New Array
 					</button>
@@ -46,6 +47,7 @@ function OptionBar(props) {
 						min="0"
 						max="100"
 						onChange={changeSize}
+						disabled={runStatus}
 					/>
 					<label htmlFor="changeSpeed">change algorithm speed:</label>
 					<input
@@ -54,6 +56,7 @@ function OptionBar(props) {
 						id="changeSpeed"
 						min="0"
 						max={defaultArraySize * 2}
+						disabled={runStatus}
 					/>
 				</div>
 
@@ -65,6 +68,7 @@ function OptionBar(props) {
 						id="algorithm"
 						value={algorithm}
 						onChange={selectAlgorithm}
+						disabled={runStatus}
 					>
 						<option value="">--</option>
 						<option value="selectionSort">Selection Sort</option>
