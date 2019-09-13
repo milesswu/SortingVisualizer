@@ -1,14 +1,56 @@
 import { setArray } from "../reducers/array/actions";
 import {
-	setSorted,
 	setComparing,
 	setSwapping,
-	setSignificant,
+	addSorted,
 } from "../reducers/element-types/actions";
-import { setRunStatus } from "../reducers/run-status/actions";
+import { swap, handleDispatch } from "./common";
 
 function bubbleSort(array, dispatch, speed) {
 	console.log("bubble");
+	let arr = [...array];
+	let dispatchStack = [];
+	let swapMade = true;
+	let numSorted = 0;
+
+	while (swapMade) {
+		swapMade = false;
+		for (let i = 0; i < arr.length - 1 - numSorted; i++) {
+			// compare procedurally along the array
+			dispatchStack.push({
+				action: setComparing,
+				payload: [i, i + 1],
+			});
+
+			if (arr[i] > arr[i + 1]) {
+				// swap adjacent elements
+				dispatchStack.push({
+					action: setSwapping,
+					payload: [i, i + 1],
+				});
+
+				swap(arr, i, i + 1);
+
+				// update state array
+				dispatchStack.push({
+					action: setArray,
+					payload: [...arr],
+				});
+
+				swapMade = true;
+			}
+		}
+
+		// indicate last element is now sorted (maximum in subarray)
+		console.log(arr.length - 1 - numSorted);
+		dispatchStack.push({
+			action: addSorted,
+			payload: arr.length - 1 - numSorted,
+		});
+		numSorted++;
+	}
+
+	handleDispatch(dispatchStack, dispatch, arr, speed);
 }
 
 export default bubbleSort;

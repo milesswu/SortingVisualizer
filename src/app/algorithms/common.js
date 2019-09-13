@@ -17,6 +17,7 @@ export function handleDispatch(dispatchStack, dispatch, array, speed) {
 			console.log("done");
 			dispatch(setComparing([]));
 			dispatch(setSwapping([]));
+			console.log(array);
 			dispatch(setSorted(array.map((element, index) => index)));
 			dispatch(setRunStatus(false));
 		});
