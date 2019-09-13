@@ -14,7 +14,7 @@ function OptionBar(props) {
 	}, [generateArray]);
 
 	const changeSize = (event) => {
-		generateArray(parseInt(event.target.value) + 2);
+		generateArray(parseInt(event.target.value) + 3);
 	};
 
 	const selectAlgorithm = (event) => {
