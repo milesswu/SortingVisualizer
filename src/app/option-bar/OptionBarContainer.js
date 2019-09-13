@@ -13,7 +13,9 @@ import mergeSort from "../algorithms/mergeSort";
 import heapSort from "../algorithms/heapSort";
 
 const mapStateToProps = (state) => ({
+	algorithm: state.algorithm,
 	array: state.array,
+	running: state.runStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -34,18 +36,25 @@ const mapDispatchToProps = (dispatch) => ({
 		switch (algorithm) {
 			case "selectionSort":
 				selectedAlgorithm = selectionSort;
+				break;
 			case "insertionSort":
 				selectedAlgorithm = insertionSort;
+				break;
 			case "bubbleSort":
 				selectedAlgorithm = bubbleSort;
+				break;
 			case "hSort":
 				selectedAlgorithm = hSort;
+				break;
 			case "quickSort":
 				selectedAlgorithm = quickSort;
+				break;
 			case "mergeSort":
 				selectedAlgorithm = mergeSort;
+				break;
 			case "heapSort":
 				selectedAlgorithm = heapSort;
+				break;
 			default:
 				selectedAlgorithm = null;
 		}
