@@ -5,9 +5,7 @@ import {
 	setSwapping,
 	setSignificant,
 } from "../reducers/element-types/actions";
-import { setRunStatus } from "../reducers/run-status/actions";
-import { swap } from "./common";
-import { setSorted } from "../reducers/element-types/actions";
+import { swap, handleDispatch } from "./common";
 
 function selectionSort(array, dispatch, speed) {
 	console.log("selection");
@@ -66,24 +64,6 @@ function selectionSort(array, dispatch, speed) {
 
 	handleDispatch(dispatchStack, dispatch, arr, speed);
 	return arr;
-}
-
-function handleDispatch(dispatchStack, dispatch, array, speed) {
-	if (!dispatchStack.length) {
-		setTimeout(() => {
-			dispatch(setComparing([]));
-			dispatch(setSwapping([]));
-			dispatch(setSorted(array.map((element, index) => index)));
-			dispatch(setRunStatus(false));
-		});
-		return;
-	}
-	let { action, payload } = dispatchStack.shift();
-	dispatch(action(payload));
-
-	setTimeout(() => {
-		handleDispatch(dispatchStack, dispatch, array, speed);
-	}, speed);
 }
 
 export default selectionSort;
