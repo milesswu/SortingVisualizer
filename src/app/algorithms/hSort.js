@@ -10,7 +10,6 @@ function hSort(array, dispatch, speed) {
 	console.log("h");
 	let arr = [...array];
 	let dispatchStack = [];
-	let numSorted = 0;
 	const h = Math.floor(Math.random() * (arr.length / 3)) + 2;
 	console.log(h);
 

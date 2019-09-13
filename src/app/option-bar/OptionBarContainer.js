@@ -47,7 +47,7 @@ const mapDispatchToProps = (dispatch) => ({
 			case "hSort":
 				selectedAlgorithm = hSort;
 				break;
-			case "shellSort ":
+			case "shellSort":
 				selectedAlgorithm = shellSort;
 				break;
 			case "quickSort":
