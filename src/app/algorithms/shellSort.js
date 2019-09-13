@@ -16,40 +16,47 @@ function shellSort(array, dispatch, speed) {
 	while (h > 0) {
 		console.log("current h: ", h);
 		//hsort
-		let swapMade = true;
-		let i = 0;
-		while (swapMade && i < arr.length) {
-			swapMade = false;
-			console.log("i equals: ", i);
-			for (let j = i; j < arr.length - h; j += h) {
-				console.log("j equals: ", j);
-				// indicate comparison between jth and j+hth elements
-				dispatchStack.push({
-					action: setComparing,
-					payload: [j, j + h],
-				});
+		for (let i = 0; i <= h; i++) {
+			let swapMade = true;
+			let numSorted = 0;
 
-				console.log(`comparing ${arr[j]} to ${arr[j + h]}`);
-				if (arr[j] > arr[j + h]) {
-					// swap elements
+			while (swapMade) {
+				swapMade = false;
+				for (let j = i; j < arr.length - h - numSorted; j += h) {
+					// compare procedurally along the array
 					dispatchStack.push({
-						action: setSwapping,
+						action: setComparing,
 						payload: [j, j + h],
 					});
 
-					console.log("swap");
-					swap(arr, j, j + h);
-					console.log("swapped array: ", arr);
-					swapMade = true;
+					if (arr[j] > arr[j + h]) {
+						// swap adjacent elements
+						dispatchStack.push({
+							action: setSwapping,
+							payload: [j, j + h],
+						});
 
-					// update state array
+						swap(arr, j, j + h);
+
+						// update state array
+						dispatchStack.push({
+							action: setArray,
+							payload: [...arr],
+						});
+
+						swapMade = true;
+					}
+				}
+
+				// indicate last element is now sorted (maximum in subarray)
+				if (h == 1) {
 					dispatchStack.push({
-						action: setArray,
-						payload: [...arr],
+						action: addSorted,
+						payload: arr.length - 1 - numSorted,
 					});
 				}
+				numSorted++;
 			}
-			i++;
 		}
 
 		h = Math.floor(h / 2);
