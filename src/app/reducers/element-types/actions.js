@@ -1,5 +1,6 @@
 // Action Types
 export const SET_SORTED = "SET_SORTED";
+export const ADD_SORTED = "ADD_SORTED";
 export const SET_COMPARING = "SET_COMPARING";
 export const SET_SWAPPING = "SET_SWAPPING";
 export const SET_SIGNIFICANT = "SET_SIGNIFICANT";
@@ -10,6 +11,15 @@ export const setSorted = (elements) => {
 		type: SET_SORTED,
 		payload: {
 			elements,
+		},
+	};
+};
+
+export const addSorted = (element) => {
+	return {
+		type: ADD_SORTED,
+		payload: {
+			element,
 		},
 	};
 };

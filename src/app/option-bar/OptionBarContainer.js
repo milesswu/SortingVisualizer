@@ -15,7 +15,7 @@ import heapSort from "../algorithms/heapSort";
 const mapStateToProps = (state) => ({
 	algorithm: state.algorithm,
 	array: state.array,
-	running: state.runStatus,
+	runStatus: state.runStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({

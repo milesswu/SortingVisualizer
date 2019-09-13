@@ -3,6 +3,7 @@ import {
 	SET_COMPARING,
 	SET_SWAPPING,
 	SET_SIGNIFICANT,
+	ADD_SORTED,
 } from "./actions";
 import { combineReducers } from "redux";
 const initialSorted = [];
@@ -17,6 +18,8 @@ const sorted = (state = initialSorted, action) => {
 	switch (action.type) {
 		case SET_SORTED:
 			return action.payload.elements;
+		case ADD_SORTED:
+			return [...state, action.payload.element];
 		default:
 			return state;
 	}
