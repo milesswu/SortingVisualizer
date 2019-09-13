@@ -1,8 +1,8 @@
 import { setArray } from "../reducers/array/actions";
 import {
+	addSorted,
 	setComparing,
 	setSwapping,
-	addSorted,
 } from "../reducers/element-types/actions";
 import { swap, handleDispatch } from "./common";
 
@@ -11,18 +11,18 @@ function shellSort(array, dispatch, speed) {
 	let arr = [...array];
 	let dispatchStack = [];
 	let h = Math.floor(arr.length / 2);
-	console.log("init array: ", array);
+	// console.log("init array: ", array);
 
 	while (h > 0) {
 		console.log("current h: ", h);
 		//hsort
-		for (let i = 0; i <= h; i++) {
+		for (let i = 0; i < h; i++) {
 			let swapMade = true;
 			let numSorted = 0;
 
 			while (swapMade) {
 				swapMade = false;
-				for (let j = i; j < arr.length - h - numSorted; j += h) {
+				for (let j = i; j < arr.length - h; j += h) {
 					// compare procedurally along the array
 					dispatchStack.push({
 						action: setComparing,

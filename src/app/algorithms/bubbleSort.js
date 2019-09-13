@@ -42,7 +42,6 @@ function bubbleSort(array, dispatch, speed) {
 		}
 
 		// indicate last element is now sorted (maximum in subarray)
-		console.log(arr.length - 1 - numSorted);
 		dispatchStack.push({
 			action: addSorted,
 			payload: arr.length - 1 - numSorted,
