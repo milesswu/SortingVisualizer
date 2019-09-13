@@ -8,9 +8,14 @@ function OptionBar(props) {
 	const { generateArray, setAlgorithm, sort } = props;
 
 	//Initialize array
+	const defaultArraySize = 50;
 	useEffect(() => {
-		generateArray(50);
+		generateArray(defaultArraySize);
 	}, [generateArray]);
+
+	const changeSize = (event) => {
+		generateArray(parseInt(event.target.value) + 2);
+	};
 
 	const selectAlgorithm = (event) => {
 		console.log(event.target.value);
@@ -33,12 +38,23 @@ function OptionBar(props) {
 
 				{/* change array size and speed of visualizer */}
 				<div className="col" id="sliders">
-					<label htmlFor="changeSize">change size of array:</label>
-					<input type="range" name="" id="changeSize" />
-					<label htmlFor="changeSpeed">
-						change speed of algorithm:
-					</label>
-					<input type="range" name="" id="changeSpeed" />
+					<label htmlFor="changeSize">change array size:</label>
+					<input
+						type="range"
+						name=""
+						id="changeSize"
+						min="0"
+						max="100"
+						onChange={changeSize}
+					/>
+					<label htmlFor="changeSpeed">change algorithm speed:</label>
+					<input
+						type="range"
+						name=""
+						id="changeSpeed"
+						min="0"
+						max={defaultArraySize * 2}
+					/>
 				</div>
 
 				{/* choose sorting algorithm */}
