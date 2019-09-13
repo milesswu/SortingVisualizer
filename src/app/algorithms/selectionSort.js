@@ -6,3 +6,9 @@ import {
 	setSignificant,
 } from "../reducers/element-types/actions";
 import { setRunStatus } from "../reducers/run-status/actions";
+
+function selectionSort(array, dispatch, speed) {
+	console.log("selection");
+}
+
+export default selectionSort;
