@@ -17,23 +17,25 @@ function insertionSort(array, dispatch, speed) {
 
 		// set last element in subarray as significant
 		dispatchStack.push({
-			action: setSignificant,
-			payload: i,
+			action: [setSignificant, setComparing, setSwapping],
+			payload: [i, [], []],
 		});
 
 		// compare all previous elements to find correct placement
 		let j = i - 1;
 		while (arr[j] > curElement && j >= 0) {
 			// indicate current comparison pair
+			// remove visual swapping
 			dispatchStack.push({
-				action: setComparing,
-				payload: [curElementIndex, j],
+				action: [setComparing, setSwapping],
+				payload: [[curElementIndex, j], []],
 			});
 
 			// swapping jth element with element of interest
+			// remove visual comparison
 			dispatchStack.push({
-				action: setSwapping,
-				payload: [curElementIndex, j],
+				action: [setSwapping, setComparing],
+				payload: [[curElementIndex, j], []],
 			});
 			swap(arr, curElementIndex, j);
 			curElementIndex = j;
@@ -47,10 +49,18 @@ function insertionSort(array, dispatch, speed) {
 			j--;
 		}
 		// indicate final comparison (no swap after this)
-		dispatchStack.push({
-			action: setComparing,
-			payload: [curElementIndex, j],
-		});
+		console.log(curElementIndex, j);
+		let finalAction = {
+			action: [setSwapping],
+			payload: [[]],
+		};
+		if (curElementIndex != j && j >= 0) {
+			finalAction = {
+				action: [setComparing, setSwapping],
+				payload: [[curElementIndex, j], []],
+			};
+		}
+		dispatchStack.push(finalAction);
 	}
 
 	handleDispatch(dispatchStack, dispatch, arr, speed);

@@ -18,15 +18,15 @@ function bubbleSort(array, dispatch, speed) {
 		for (let i = 0; i < arr.length - 1 - numSorted; i++) {
 			// compare procedurally along the array
 			dispatchStack.push({
-				action: setComparing,
-				payload: [i, i + 1],
+				action: [setComparing, setSwapping],
+				payload: [[i, i + 1], []],
 			});
 
 			if (arr[i] > arr[i + 1]) {
 				// swap adjacent elements
 				dispatchStack.push({
-					action: setSwapping,
-					payload: [i, i + 1],
+					action: [setSwapping, setComparing],
+					payload: [[i, i + 1], []],
 				});
 
 				swap(arr, i, i + 1);
@@ -43,8 +43,8 @@ function bubbleSort(array, dispatch, speed) {
 
 		// indicate last element is now sorted (maximum in subarray)
 		dispatchStack.push({
-			action: addSorted,
-			payload: arr.length - 1 - numSorted,
+			action: [addSorted, setSwapping],
+			payload: [arr.length - 1 - numSorted, []],
 		});
 		numSorted++;
 	}

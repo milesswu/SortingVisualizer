@@ -21,6 +21,10 @@ function quickSort(array, dispatch, speed) {
 
 function quickSortHelper(array, start, end, dispatchStack) {
 	if (start >= end) {
+		dispatchStack.push({
+			action: [addSorted],
+			payload: [start],
+		});
 		return;
 	}
 
@@ -29,8 +33,8 @@ function quickSortHelper(array, start, end, dispatchStack) {
 	high = partition(array, low, high, dispatchStack);
 	// the pivot used in the partition is now sorted
 	dispatchStack.push({
-		action: addSorted,
-		payload: high,
+		action: [addSorted, setSwapping, setComparing],
+		payload: [high, [], []],
 	});
 	// console.log("after partition array: ", array.slice(start, end + 1));
 
@@ -51,48 +55,46 @@ function partition(array, low, high, dispatchStack) {
 		action: setSignificant,
 		payload: pivotIndex,
 	});
+	low++;
+	dispatchStack.push({
+		action: setComparing,
+		payload: [low, high],
+	});
 
-	// console.log("partition array: ", array.slice(low, high + 1));
-	do {
-		// find earliest array element that is greater than pivot value
-		dispatchStack.push({
-			action: setComparing,
-			payload: [pivotIndex, low],
-		});
-		while (low <= high && array[low] <= pivot) {
-			low++;
-		}
-
-		// find latest array element that is less than or equal to pivot value
-		dispatchStack.push({
-			action: setComparing,
-			payload: [pivotIndex, high],
-		});
-		while (array[high] > pivot) {
-			high--;
-		}
-
-		if (low < high) {
-			// swap positions of > pivot and <= pivot values
-			// this process is what partitions the array
+	while (high >= low) {
+		if (array[high] < pivot && array[low] > pivot) {
 			dispatchStack.push({
-				action: setSwapping,
-				payload: [low, high],
+				action: [setSwapping, setComparing],
+				payload: [[low, high], []],
 			});
+
 			swap(array, low, high);
 
 			// update state array
 			dispatchStack.push({
-				action: setArray,
-				payload: [...array],
+				action: [setArray, setSwapping],
+				payload: [[...array], []],
 			});
 		}
-	} while (low < high);
+
+		if (array[high] >= pivot) {
+			high--;
+		}
+		if (array[low] <= pivot) {
+			low++;
+		}
+		if (high >= low) {
+			dispatchStack.push({
+				action: [setComparing, setSwapping],
+				payload: [[low, high], []],
+			});
+		}
+	}
 
 	// swap pivot with latest element that is <=
 	dispatchStack.push({
-		action: setSwapping,
-		payload: [pivotIndex, high],
+		action: [setSwapping, setComparing],
+		payload: [[pivotIndex, high], []],
 	});
 	swap(array, pivotIndex, high);
 

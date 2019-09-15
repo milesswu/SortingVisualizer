@@ -22,18 +22,18 @@ function shellSort(array, dispatch, speed) {
 
 			while (swapMade) {
 				swapMade = false;
-				for (let j = i; j < arr.length - h; j += h) {
+				for (let j = i; j < arr.length - h - numSorted; j += h) {
 					// compare procedurally along the array
 					dispatchStack.push({
-						action: setComparing,
-						payload: [j, j + h],
+						action: [setComparing, setSwapping],
+						payload: [[j, j + h], []],
 					});
 
 					if (arr[j] > arr[j + h]) {
 						// swap adjacent elements
 						dispatchStack.push({
-							action: setSwapping,
-							payload: [j, j + h],
+							action: [setSwapping, setComparing],
+							payload: [[j, j + h], []],
 						});
 
 						swap(arr, j, j + h);
@@ -51,8 +51,8 @@ function shellSort(array, dispatch, speed) {
 				// indicate last element is now sorted (maximum in subarray)
 				if (h == 1) {
 					dispatchStack.push({
-						action: addSorted,
-						payload: arr.length - 1 - numSorted,
+						action: [addSorted, setComparing, setSwapping],
+						payload: [arr.length - 1 - numSorted, [], []],
 					});
 				}
 				numSorted++;

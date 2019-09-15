@@ -85,7 +85,7 @@ function OptionBar(props) {
 				{/* start sorting */}
 				<div className="col">
 					<button
-						onClick={() => sort(array, algorithm, 10)}
+						onClick={() => sort(array, algorithm, 100)}
 						disabled={runStatus || algorithm === ""}
 					>
 						Sort

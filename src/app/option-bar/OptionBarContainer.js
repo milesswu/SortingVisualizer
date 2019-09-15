@@ -25,6 +25,7 @@ const mapDispatchToProps = (dispatch) => ({
 		while (array.length < length) {
 			array.push(Math.floor(Math.random() * 200) + 10);
 		}
+		dispatch(setSorted([]));
 		dispatch(setArray(array));
 	},
 	setAlgorithm: (algorithm) => {

@@ -20,7 +20,7 @@ function selectionSort(array, dispatch, speed) {
 			payload: curMinIndex,
 		});
 
-		for (let j = i; j < arr.length; j++) {
+		for (let j = i + 1; j < arr.length; j++) {
 			// comparing jth element to current minimum
 			dispatchStack.push({
 				action: setComparing,
@@ -32,20 +32,30 @@ function selectionSort(array, dispatch, speed) {
 			); */
 			if (arr[j] < curMin) {
 				// update minimum value
+				// stop visual comparison
 				curMin = arr[j];
 				curMinIndex = j;
 				dispatchStack.push({
-					action: setSignificant,
-					payload: curMinIndex,
+					action: [setSignificant, setComparing],
+					payload: [curMinIndex, []],
 				});
+
+				// stop visual comparison
+				// dispatchStack.push({
+				// 	action: setComparing,
+				// 	payload: [],
+				// });
 			}
 		}
 
-		//swapping minimum with first unsorted element in array
-		dispatchStack.push({
-			action: setSwapping,
-			payload: [curMinIndex, i],
-		});
+		// remove comparison
+		// swapping minimum with first unsorted element in array
+		if (curMinIndex != i) {
+			dispatchStack.push({
+				action: [setSwapping, setComparing],
+				payload: [[curMinIndex, i], []],
+			});
+		}
 
 		swap(arr, curMinIndex, i);
 
@@ -55,10 +65,12 @@ function selectionSort(array, dispatch, speed) {
 			payload: [...arr],
 		});
 
-		//mark ith element as sorted
+		// unmark significant
+		// unmark swapped elements
+		// mark ith element as sorted
 		dispatchStack.push({
-			action: addSorted,
-			payload: i,
+			action: [setSignificant, setSwapping, addSorted],
+			payload: [[], [], i],
 		});
 	}
 
