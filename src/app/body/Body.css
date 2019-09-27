@@ -1,0 +1,15 @@
+.bodyContainer {
+	flex: 1;
+	text-align: center;
+	display: flex !important;
+	justify-content: center;
+	align-items: flex-end;
+	flex-direction: row;
+}
+
+.arrayElement {
+	padding-top: 7px;
+	font-family: sans-serif;
+	font-weight: 700;
+	font-size: 0.8rem;
+}

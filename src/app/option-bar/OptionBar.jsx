@@ -21,6 +21,7 @@ function OptionBar(props) {
 		console.log(event.target.value);
 		setAlgorithm(event.target.value);
 	};
+	console.log(array.length);
 
 	//Render logic
 	return (
