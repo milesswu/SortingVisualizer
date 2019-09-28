@@ -4,6 +4,7 @@ import { setArray } from "../reducers/array/actions";
 import { setAlgorithm } from "../reducers/algorithm/actions";
 import { setSorted } from "../reducers/element-types/actions";
 import { setRunStatus } from "../reducers/run-status/actions";
+import { setSpeed } from "../reducers/speed/actions";
 import selectionSort from "../algorithms/selectionSort";
 import insertionSort from "../algorithms/insertionSort";
 import bubbleSort from "../algorithms/bubbleSort";
@@ -17,6 +18,7 @@ const mapStateToProps = (state) => ({
 	algorithm: state.algorithm,
 	array: state.array,
 	runStatus: state.runStatus,
+	speed: state.speed,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -30,6 +32,9 @@ const mapDispatchToProps = (dispatch) => ({
 	},
 	setAlgorithm: (algorithm) => {
 		dispatch(setAlgorithm(algorithm));
+	},
+	setSpeed: (speed) => {
+		dispatch(setSpeed(speed));
 	},
 	sort: (array, algorithm, speed) => {
 		let selectedAlgorithm;

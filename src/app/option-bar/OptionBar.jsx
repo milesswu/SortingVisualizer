@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import "./OptionBar.css";
 function OptionBar(props) {
 	// Get State Data
-	const { algorithm, array, runStatus } = props;
+	const { algorithm, array, runStatus, speed } = props;
 
 	// Get Dispatch Methods
-	const { generateArray, setAlgorithm, sort } = props;
+	const { generateArray, setAlgorithm, setSpeed, sort } = props;
 
 	//Initialize array
 	const defaultArraySize = 50;
@@ -21,7 +21,16 @@ function OptionBar(props) {
 		console.log(event.target.value);
 		setAlgorithm(event.target.value);
 	};
-	console.log(array.length);
+
+	// Handle Algorithm Speed
+	const defaultSpeed = 500;
+	useEffect(() => {
+		setSpeed(defaultSpeed);
+	}, [setSpeed]);
+	const minSpeed = 1000;
+	const changeSpeed = (event) => {
+		setSpeed(minSpeed - parseInt(event.target.value));
+	};
 
 	//Render logic
 	return (
@@ -56,7 +65,9 @@ function OptionBar(props) {
 						name=""
 						id="changeSpeed"
 						min="0"
-						max={defaultArraySize * 2}
+						max={minSpeed}
+						value={minSpeed - speed}
+						onChange={changeSpeed}
 						disabled={runStatus}
 					/>
 				</div>
@@ -86,7 +97,7 @@ function OptionBar(props) {
 				{/* start sorting */}
 				<div className="col">
 					<button
-						onClick={() => sort(array, algorithm, 100)}
+						onClick={() => sort(array, algorithm, speed)}
 						disabled={runStatus || algorithm === ""}
 					>
 						Sort
