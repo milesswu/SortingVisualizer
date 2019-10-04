@@ -23,11 +23,11 @@ function OptionBar(props) {
 	};
 
 	// Handle Algorithm Speed
-	const defaultSpeed = 500;
+	const defaultSpeed = 250;
 	useEffect(() => {
 		setSpeed(defaultSpeed);
 	}, [setSpeed]);
-	const minSpeed = 1000;
+	const minSpeed = 500;
 	const changeSpeed = (event) => {
 		setSpeed(minSpeed - parseInt(event.target.value));
 	};
