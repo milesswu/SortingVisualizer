@@ -89,8 +89,8 @@ function OptionBar(props) {
 						<option value="hSort">H Sort</option>
 						<option value="shellSort">Shell Sort</option>
 						<option value="quickSort">QuickSort</option>
-						<option value="mergeSort">Merge Sort</option>
-						<option value="heapSort">Heap Sort</option>
+						{/* <option value="mergeSort">Merge Sort</option> */}
+						{/* <option value="heapSort">Heap Sort</option> */}
 					</select>
 				</div>
 
